@@ -1568,6 +1568,7 @@ p {
   &__left {
     width: 50%;
     padding-right: 10px;
+    align-self: flex-start;
 
     @include respond-to(mobile) {
       width: 100%;
@@ -1940,7 +1941,7 @@ p {
 
 
 .cigarettes .slick-slider {
-  max-height: 600px;
+  //max-height: 600px;
 }
 .cigarettes-galllery__item {
   position: relative;
@@ -1957,7 +1958,7 @@ p {
 @include respond-to(height-max) {
   .cigarettes .slick-slider,
   .cigarettes-galllery__item {
-    max-height: 400px !important;
+    //max-height: 400px !important;
   }
 }
 .cigarettes-galllery__item_in {
@@ -1982,7 +1983,9 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-45%,-50%);
+  transform: translate(-50%,-50%);
+  padding-top: 20px;
+  //padding-left: 3%;
 }
 .cigarettes-galllery__picposition .catalog-item__size {
   transform: scale(0.45);
@@ -1992,12 +1995,19 @@ p {
 }
 .cigarettes-galllery__fajek {
   position: absolute;
-  top: 45%;
-  left: 55%;
+  top: 84%;
+  left: 10%;
+  right: 0;
+  transform: rotate(-8deg);
+  height: 60px;
 }
 .cigarettes-galllery__fajek img {
-  height: 510px;
-  transform: rotate(82deg);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin: 0 0 0 -490px;
+  max-width: none;
+  width: 980px;
 }
 
 
@@ -3010,6 +3020,10 @@ p {
     width: 50%;
   }
 }
+.section-form-in {
+  padding-top: 70px;
+}
+
 .head-form {
   width: 100%;
   color: #ccac7a;
@@ -3047,10 +3061,10 @@ p {
   padding-right: 7%;
 }
 .form-line {
-  padding: 45px 0;
+  padding: 16px 0;
 }
 .form-btn {
-  padding-top: 75px;
+  padding-top: 45px;
 }
 .form-label {
   padding-bottom: 14px;
@@ -4002,7 +4016,8 @@ p {
   zoom: 0.45;
   position: relative;
   margin: 0 auto;
-  //margin-top: 110px;  
+  left: 6%;
+  //top: 20px;
 
 }
 
