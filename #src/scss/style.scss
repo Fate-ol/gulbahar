@@ -1947,20 +1947,36 @@ p {
   position: relative;
   text-align: center;
   display: flex !important;
+  
+
+  @media (max-width: 500px){
+    height: 270px !important;
+  }
+
 }
 
 .cigarettes-galllery__item img {
-  max-width: 100%;
-  max-height: 100%;
+  //max-width: 100%;
+  //max-height: 100%;
+  //margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   margin: auto;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center center;
 }
 
-@include respond-to(height-max) {
-  .cigarettes .slick-slider,
-  .cigarettes-galllery__item {
-    //max-height: 400px !important;
-  }
-}
+//@include respond-to(height-max) {
+//  .cigarettes .slick-slider,
+//  .cigarettes-galllery__item {
+//    max-height: 400px !important;
+//  }
+//}
 .cigarettes-galllery__item_in {
   position: relative;
   width: 100%;
@@ -1985,7 +2001,9 @@ p {
   left: 50%;
   transform: translate(-50%,-50%);
   padding-top: 20px;
-  //padding-left: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cigarettes-galllery__picposition .catalog-item__size {
   transform: scale(0.45);
@@ -1995,11 +2013,12 @@ p {
 }
 .cigarettes-galllery__fajek {
   position: absolute;
-  top: 84%;
+  top: 96%;
   left: 10%;
   right: 0;
   transform: rotate(-8deg);
   height: 60px;
+  z-index: 5;
 }
 .cigarettes-galllery__fajek img {
   position: absolute;
@@ -2007,7 +2026,7 @@ p {
   left: 50%;
   margin: 0 0 0 -490px;
   max-width: none;
-  width: 980px;
+  width: 981px;
 }
 
 
@@ -3544,6 +3563,7 @@ p {
   padding: 40px 0 55px 0;
   border: transparent 1px solid;
   transition: all 0.3s ease;
+  
 
 		&__name {
       display: flex;
@@ -3974,8 +3994,6 @@ p {
   }
 }
 
-
-
 .catalog-item-cigarettes .catalog-item__mainpic img {
   max-width: 264px;
 }
@@ -3985,6 +4003,7 @@ p {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 .catalog-item__picposition {
   position: absolute;
@@ -4015,9 +4034,13 @@ p {
   -moz-transform: scale( 0.45);
   zoom: 0.45;
   position: relative;
-  margin: 0 auto;
-  left: 6%;
-  //top: 20px;
+  margin: 0 0 0 60px;
+  left: 0;
+
+  @include respond-to(mobile) {
+    margin: 0 0 0 35px;
+  }
+  
 
 }
 
@@ -4061,7 +4084,7 @@ p {
 	width: 644px;
 	height: 1019px;
 	position: relative;
-
+  z-index: 2;
 	transform-origin: bottom left;
 	transition: transform 2000ms ease-in-out;
 }

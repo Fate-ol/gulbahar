@@ -2495,10 +2495,25 @@ p {
   display: flex !important;
 }
 
+@media (max-width: 500px) {
+  .cigarettes-galllery__item {
+    height: 270px !important;
+  }
+}
+
 .cigarettes-galllery__item img {
-  max-width: 100%;
-  max-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   margin: auto;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center center;
+  object-position: center center;
 }
 
 .cigarettes-galllery__item_in {
@@ -2529,6 +2544,15 @@ p {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   padding-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .cigarettes-galllery__picposition .catalog-item__size {
@@ -2543,13 +2567,14 @@ p {
 
 .cigarettes-galllery__fajek {
   position: absolute;
-  top: 84%;
+  top: 96%;
   left: 10%;
   right: 0;
   -webkit-transform: rotate(-8deg);
       -ms-transform: rotate(-8deg);
           transform: rotate(-8deg);
   height: 60px;
+  z-index: 5;
 }
 
 .cigarettes-galllery__fajek img {
@@ -2558,7 +2583,7 @@ p {
   left: 50%;
   margin: 0 0 0 -490px;
   max-width: none;
-  width: 980px;
+  width: 981px;
 }
 
 .cigarettes .slick-prev {
@@ -5814,6 +5839,7 @@ p {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .catalog-item__picposition {
@@ -5854,8 +5880,14 @@ p {
   -moz-transform: scale(0.45);
   zoom: .45;
   position: relative;
-  margin: 0 auto;
-  left: 6%;
+  margin: 0 0 0 60px;
+  left: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .animation_cigaret {
+    margin: 0 0 0 35px;
+  }
 }
 
 .animation_cigaret:after {
@@ -5900,6 +5932,7 @@ p {
   width: 644px;
   height: 1019px;
   position: relative;
+  z-index: 2;
   -webkit-transform-origin: bottom left;
       -ms-transform-origin: bottom left;
           transform-origin: bottom left;
