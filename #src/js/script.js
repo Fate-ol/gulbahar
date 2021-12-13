@@ -1,40 +1,27 @@
 $(document).ready(function(){
 	
 	
+	$('input.styler, select.styler').styler();
+	
   function section__text_r()
 	{
-    if (document.documentElement.clientWidth > 768) {
-      $('.section__text').css('max-height',
-      ($(window).height()-
-      ($('.head').outerHeight(true)+$('.nav-sub').outerHeight(true)+$('.section__btn').outerHeight(true))
-      )+'px');
+		
+		if (document.documentElement.clientWidth > 768) 
+		{
+		  $('.section__text').css('max-height',($(window).height()-($('.head').outerHeight(true)+$('.nav-sub').outerHeight(true)+$('.section__btn').outerHeight(true)))+'px');
 
-      $('.cigarettes-galllery__item').css('height',
-      ($(window).height()-$('.head').outerHeight(true))+'px');
-    }
-    else {
-      $('.section__text').css('max-height','none'
-      );
+		  $('.cigarettes-galllery__item').css('height',($(window).height()-$('.head').outerHeight(true))+'px');
+		}
+		else 
+		{
+		  $('.section__text').css('max-height','none');
 
-      $('.cigarettes-galllery__item').css('height','300px'
-      );
-    }
-    $('.cigarettes-galllery__item').css('max-height',$('.section__left').height()+'px');
+		  $('.cigarettes-galllery__item').css('height','300px');
+		}
+		$('.cigarettes-galllery__item').css('max-height',$('.section__left').height()+'px');
 	}
-	$(window).resize(function()
-	{
-    section__text_r();
-	});
-	section__text_r();
 	
-	$(window).on("load", function()
-	{
-		section__text_r();
-	});
-
-	
-	
-	var rounded = function(number){
+		var rounded = function(number){
     return Math.round(parseFloat(number) * 100) / 100;
 }
 	
@@ -58,7 +45,7 @@ $(document).ready(function(){
     
     console.log(height_scale+' '+width_scale);
     
-    if (height_scale>width_scale)
+    if (height_scale>width_scale && width_scale!=0)
     {
       find_scale=width_scale;
     }
@@ -67,16 +54,66 @@ $(document).ready(function(){
       find_scale=height_scale;
     }
     $('.cigarettes-galllery__picposition .catalog-item__size').css("transform","scale("+find_scale+")");
-    //$('.cigarettes-galllery__fajek img').css("transform","scale("+find_scale+")");
-	}
+
+
+
+    /* catalog category page*/
+    height2=$('.catalog-item__piccigaret').height();
+    height2_scale=rounded((height2-50)/1220);
+
+    width2=$('.catalog-item__piccigaret').width();
+    width2_scale=rounded(width2/1320);
+
+    console.log(height2_scale+' '+width2_scale);
+
+    if (height2_scale>width2_scale)
+    {
+      find_scale=width2_scale;
+    }
+    else
+    {
+      find_scale=height2_scale;
+    }
+    $('.catalog-item__piccigaret .catalog-item__size').css("transform","scale("+find_scale+")");
+
+
+
+  }
 	
-	check_scale();
+	 function slide_r()
+	{
+		$('.header-wrapper').css('height',$('.header-out').height()+'px');
+		$('.footer-wrapper').css('height',$('.footer.footer-pages').outerHeight(true)+'px');
+    //if (document.documentElement.clientWidth > 768) {
+      //$('.cigarettes-galllery__item').css('height',$('.section__left').height()+40+'px');
+    //}  
+    //else {
+       //$('.cigarettes-galllery__item').css('height','400px');
+    //}
+   
+	}
 	
 	$(window).resize(function()
 	{
-   
-	check_scale();
+		section__text_r();
+		check_scale();
+		slide_r();
 	});
+	section__text_r();
+	check_scale();
+	slide_r();
+	
+	$(window).on("load", function()
+	{
+		section__text_r();
+		check_scale();
+		slide_r();
+	});
+
+	
+
+	
+
     
 	
 	delay=false;
@@ -101,7 +138,7 @@ $(document).ready(function(){
 				},timeDelay);
 			}
 			
-			if (check_first)
+			if (check_first && first_slide)
 			{
 				$('.section:visible').addClass("animation");
 				first_slide=false;
@@ -109,95 +146,121 @@ $(document).ready(function(){
 			
 		}
 	
-//	$('.section').not(":first").hide();
-//	//check_delay();
-//	anim="";
-//	wait_delay=false;
-//function next()
-//		{
+	$('.section').not(":first").hide();
+	check_delay();
+	anim="";
+	wait_delay=false;
+function next()
+		{
 			
-//			if ($(".section").index($('.section:visible'))==0)
-//			{
-//				check_delay(true);
-//			}
-//			if (!anim)
-//			{
-//				if (!delay)
-//				{
-//					cur=$('.section:visible');
+				if ($('.scroll-down-b').is(":visible"))
+					{
+						$('.scroll-down-b').fadeOut();
+					}
+			if ($(".section").index($('.section:visible'))==0)
+			{
+				check_delay(true);
+			}
+			if (!anim)
+			{
+				if (!delay)
+				{
+				
+					cur=$('.section:visible');
 					
-//					if (cur.next(".section").length>0)
-//					{
-//						cur.fadeOut(function()
-//						{
-//							cur.removeClass("section-show animation");
-//							cur.next(".section").addClass("section-show animation").fadeIn();
-//							$('.galllery-slider').slick('refresh');
-//              check_scale();
+					if (cur.next(".section").length>0)
+					{
+						cur.fadeOut(function()
+						{
+						if ($(".section").index(cur)==0)
+							{
+								cur.removeClass("animation"); //animation
+							}
+							
+							cur.removeClass("section-show"); //animation
+							$('.cigarettes-galllery__picposition.active_animation_cigaret').removeClass('active_animation_cigaret');
+							cur.next(".section").addClass("section-show").fadeIn(function()
+							{
+								//alert(1);
+								$(window).triggerHandler("resize");
+								$('.cigarettes-galllery__picposition').not('.active_animation_cigaret').addClass('active_animation_cigaret');
+								//$('.galllery-slider')[0].slick.resize();
+								//check_scale();
+							});
+							
 
-//						});
+						});
 						
-//					}
-//				}
-//				else
-//				{
-//					setTimeout(function()
-//					{
-//						next();
-//					},500);
-//				}
+					}
+				}
+				else
+				{
+					setTimeout(function()
+					{
+						next();
+					},500);
+				}
 
 				
-//			}
+			}
 			
-//		}
-//		function prev()
-//		{
-//			if (!anim)
-//			{
+		}
+		function prev()
+		{
+			if (!anim)
+			{
 				
-//				cur=$('.section:visible');
+				cur=$('.section:visible');
 				
-//				if (cur.prev(".section").length>0)
-//				{
-//					cur.removeClass("section-show animation").fadeOut(function()
-//					{
-//						cur.prev(".section").addClass("section-show animation").fadeIn();
-//						$('.galllery-slider').slick('refresh');
-//            check_scale();
+				if (cur.prev(".section").length>0)
+				{
+						$('.cigarettes-galllery__picposition.active_animation_cigaret').removeClass('active_animation_cigaret');
+					cur.removeClass("section-show").fadeOut(function()
+					{
+						cur.prev(".section").addClass("section-show").fadeIn(function()
+							{
+								/*if ($(".section").index(cur.prev(".section"))>0)
+								{
+									$(this).addClass("animation")
+								}*/
+								//$('.galllery-slider').slick('refresh');
+								//check_scale();
+								$(window).triggerHandler("resize");
+								$('.cigarettes-galllery__picposition').not('.active_animation_cigaret').addClass('active_animation_cigaret');
+							});
 
-//					});
+					});
 					
-//				}
+				}
 		
-//			}
-//		}
+			}
+		}
 		
 	
-//		$(window).keyup(function(e)
-//		{
-//			if (e.keyCode==38)//нажали вверх 
-//			{
-//				prev();
-//			}
+		$(window).keyup(function(e)
+		{
+			if (e.keyCode==38) //нажали вверх 
+			{
+				prev();
+			}
 			
-//			if (e.keyCode==40)//нажали вниз 
-//			{
-//				next();
-//			}
-//		});
+			if (e.keyCode==40) //нажали вниз 
+			{
+				next();
+			}
+		});
 		
 		
-//		$(window).mousewheel(function (event, delta) {
-//			if (delta>0)
-//			{
-//				prev();
-//			}
-//			else
-//			{
-//				next();
-//			}
-//		});
+		$(window).mousewheel(function (event, delta) {
+			if (delta>0)
+			{
+				prev();
+			}
+			else
+			{
+				next();
+			}
+		});
 	
 
   $('.main-menu__ico').click(function() {
@@ -205,28 +268,15 @@ $(document).ready(function(){
     return false;
   });
 
-  function slide_r()
-	{
-		$('.header-wrapper').css('height',$('.header-out').height()+'px');
-		$('.footer-wrapper').css('height',$('.section-footer').height()+'px');
-    //if (document.documentElement.clientWidth > 768) {
-      //$('.cigarettes-galllery__item').css('height',$('.section__left').height()+40+'px');
-    //}  
-    //else {
-       //$('.cigarettes-galllery__item').css('height','400px');
-    //}
-   
-	}
-	$(window).resize(function()
-	{
-    slide_r();
-	});
-	section__text_r();
+
+$('.scroll-down-b a').click(function()
+{
 	
-	$(window).on("load", function()
-	{
-		slide_r();
-	});
+		next();
+	return false;
+});
+ 
+	
 
 
 
@@ -238,32 +288,15 @@ $(document).ready(function(){
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
-    //dots: true,
-    //mobileFirst: true,
-  //  responsive: [
-  //      {
-  //          breakpoint: 991,
-  //          settings: {
-  //            arrows: false,
-  //            slidesToShow: 2
-  //          }
-  //      },
-  //      {
-  //        breakpoint: 767,
-  //        settings: {
-  //          arrows: false,
-  //          slidesToShow: 1
-  //        }
-  //  },
-  //]
+
   });
-  (function($) {
-    $(function() {
-    
-      $('input.styler, select.styler').styler();
-    
-    });
-  })(jQuery);
+
+
+  $('.link-arr').click(function() {
+    $( this ).closest('.catalog-tile-out').toggleClass('hide');
+    return false;
+  });
+
 });
 
 
