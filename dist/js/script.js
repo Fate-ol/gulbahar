@@ -1,5 +1,12 @@
 $(document).ready(function(){
 	
+function isTouchDevice() {
+ try {
+    document.createEvent("TouchEvent");
+    return true;
+  }
+  catch (e) { return false; }
+ }	
 	
 	$('input.styler, select.styler').styler();
 	
@@ -146,7 +153,7 @@ $(document).ready(function(){
 			
 		}
 	
-	$('.section').not(":first").hide();
+	
 	check_delay();
 	anim="";
 	wait_delay=false;
@@ -236,31 +243,39 @@ function next()
 			}
 		}
 		
-	
-		$(window).keyup(function(e)
+		//alert("touch ".isTouchDevice());
+		if (!isTouchDevice())
 		{
-			if (e.keyCode==38) //нажали вверх 
+			$('.section').not(":first").hide();
+			$(window).keyup(function(e)
 			{
-				prev();
-			}
+				if (e.keyCode==38) //нажали вверх 
+				{
+					prev();
+				}
+				
+				if (e.keyCode==40) //нажали вниз 
+				{
+					next();
+				}
+			});
 			
-			if (e.keyCode==40) //нажали вниз 
-			{
-				next();
-			}
-		});
-		
-		
-		$(window).mousewheel(function (event, delta) {
-			if (delta>0)
-			{
-				prev();
-			}
-			else
-			{
-				next();
-			}
-		});
+			
+			$(window).mousewheel(function (event, delta) {
+				if (delta>0)
+				{
+					prev();
+				}
+				else
+				{
+					next();
+				}
+			});
+		}
+		else
+		{
+			$('.scroll-down-b').hide();
+		}
 	
 
   $('.main-menu__ico').click(function() {
